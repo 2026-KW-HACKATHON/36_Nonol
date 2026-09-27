@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 318 247" width="318" height="247">
+<!-- 노놀 로고. 마스터 벡터. 구름은 타원 5개의 합집합, 글자는 윤곽선 path (폰트 의존 없음) -->
+<defs><clipPath id="cloud"><ellipse cx="83.57" cy="123.79" rx="82.92" ry="69.74"/><ellipse cx="234.43" cy="123.79" rx="82.92" ry="69.74"/><ellipse cx="159" cy="68.78" rx="72.68" ry="68.97"/><ellipse cx="159" cy="162.98" rx="78.33" ry="85.02"/><ellipse cx="159" cy="123.79" rx="156.7" ry="80.06"/></clipPath></defs>
+<g clip-path="url(#cloud)"><rect width="318" height="123.81" fill="#3D62AD"/><rect y="123.81" width="318" height="123.19" fill="#5AB651"/></g>
+</svg>
