@@ -25,8 +25,8 @@
 | [research/user_research/](research/user_research/) | 할인 및 쿠폰 서비스 이용 경험 설문. 설계, 설문 사이트, 모집 글 | 실제로 쓰는 것 |
 | [marketing/](marketing/) | 소개 영상, 팀원 모집 글 | 실제로 알린 것 |
 | [design/logo/](design/logo/) | 로고 | 실제 리소스 |
-| [product/](product/) | 비어 있음. 완성된 제품이 들어올 자리 | |
-| [docs/](docs/applications/kw_hackathon_2026/03_작업파일/260928_0550_6장_명세_모음/) | 중간발표 6장의 근거. 매니패스트로 받은 기능명세와 유저플로우 초안, 팀 기준으로 교정한 판, 교정 기록, 화면 캡처 | 정제된 데이터 |
+| [product/wireframe/](product/wireframe/) | 와이어프레임과 기능명세. 매니패스트로 받은 초안, 팀 기준으로 교정한 판, 교정 기록, 화면 캡처 | 정제된 데이터 |
+| [docs/](docs/) | 비어 있음. 확정된 문서가 들어올 자리 | |
 | [team/](team/) | 비어 있음 | |
 
 ## 1. 문제 의식
