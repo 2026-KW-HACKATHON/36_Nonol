@@ -1,0 +1,21 @@
+# 실행 산출물
+node_modules/
+.wrangler/
+logs/
+*.log
+__pycache__/
+
+# 비밀값 (Cloudflare secrets 와 .local 에만 둔다)
+.local/
+.dev.vars
+.env
+.env.*
+
+# 로컬 설정과 작업 메모
+.claude/
+memory/
+project.md
+insight.md
+
+# 시스템 파일
+.DS_Store
