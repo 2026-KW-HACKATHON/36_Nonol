@@ -1,0 +1,20 @@
+{
+  "name": "coupon-survey",
+  "private": true,
+  "version": "0.1.0",
+  "description": "노놀 유저 리서치 설문. 할인 및 쿠폰 서비스 이용 경험",
+  "scripts": {
+    "db:migrate": "wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
+    "dev": "npm run db:migrate && wrangler dev --port 8792",
+    "deploy": "npm run db:migrate:remote && wrangler deploy",
+    "check": "node --check src/worker.js && node --check src/survey.js && node --check public/app.js && node --check scripts/results.mjs && node --check scripts/draw.mjs",
+    "test": "node --test test/*.test.js",
+    "results": "node scripts/results.mjs",
+    "draw": "node scripts/draw.mjs",
+    "purge": "node scripts/draw.mjs --purge"
+  },
+  "devDependencies": {
+    "wrangler": "4.132.0"
+  }
+}

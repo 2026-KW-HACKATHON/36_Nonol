@@ -1,0 +1,20 @@
+{
+  // 노놀 유저 리서치 설문. public/ 의 정적 파일을 내보내고, Worker 는 응답을 받아 저장만 한다. 조회 주소는 없다.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "coupon-survey",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-22",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "nonol-survey",
+    "database_id": "ee1f6652-a7e7-495c-a121-889ecfb51349",
+    "migrations_dir": "migrations"
+  }]
+}
