@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nonol-alpha-hackathon",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-22",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "nonol-alpha-hackathon",
+    "database_id": "00000000-0000-0000-0000-000000000000",
+    "migrations_dir": "migrations"
+  }]
+}

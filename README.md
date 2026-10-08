@@ -26,6 +26,7 @@
 | [marketing/](marketing/) | 소개 영상, 팀원 모집 글 | 실제로 알린 것 |
 | [design/logo/](design/logo/) | 로고 | 실제 리소스 |
 | [product/wireframe/](product/wireframe/) | 와이어프레임과 기능명세. 매니패스트로 받은 초안, 팀 기준으로 교정한 판, 교정 기록, 화면 캡처 | 정제된 데이터 |
+| [product/alpha/](product/alpha/) | 묵언수행 알파 신청 페이지, 4명 사진, 신청 API와 DB 스키마. [배포 페이지](https://nonol-alpha.1991knet.workers.dev/v2/) | 실제로 쓰는 것 |
 | [docs/](docs/) | 확정된 문서가 들어올 자리 | |
 | [team/](team/) | 팀 도구가 들어올 자리 | |
 
@@ -49,7 +50,7 @@
 
 ## 2. 어떻게 푸는가
 
-제품 코드는 만드는 중이며 완성되면 product, team 폴더에 올린다. 지금은 와이어프레임과 기능명세가 product/wireframe 에 있다.
+묵언수행 알파 신청 페이지는 product/alpha에 있으며 트랙 소개와 신청 저장을 제공한다. 와이어프레임과 기능명세는 product/wireframe에 있다. 게임 진행과 팀 도구는 각각 완성된 범위부터 추가한다.
 
 ### 2.1 제품
 
