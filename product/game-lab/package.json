@@ -1,0 +1,36 @@
+{
+  "name": "nonol-game-lab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run vendor && wrangler dev --port 8791",
+    "deploy": "npm run vendor && wrangler deploy",
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/room-state.test.mjs tests/lab-state.test.mjs tests/geo.test.mjs tests/sensors.test.mjs tests/photo.test.mjs tests/game-room.test.mjs tests/route-geo.test.mjs tests/261008_2228_npc-ar.test.mjs tests/261009_0159_lab-directory.test.mjs tests/261009_0320_registration.test.mjs tests/261009_0355_spatial-route.test.mjs tests/261009_0513_module-state.test.mjs tests/261009_0536_track-config.test.mjs tests/261009_0536_map-provider.test.mjs",
+    "test:socket": "node --test tests/socket.test.mjs tests/lab-socket.test.mjs",
+    "room:create": "node scripts/create-room.mjs",
+    "policy:render": "node scripts/render-policy.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "vendor": "node scripts/vendor.mjs",
+    "test:browser:sensors": "node tests/sensors-browser.mjs",
+    "test:isolation": "node tests/isolation-browser.mjs",
+    "test:browser:directory": "node tests/261009_0159_directory-browser.mjs",
+    "test:browser:registration": "node tests/261009_0320_registration-browser.mjs",
+    "rooms:import": "node scripts/261009_0159_import-rooms.mjs",
+    "test:browser:spatial-route": "node tests/261009_0355_spatial-route-browser.mjs",
+    "test:browser:modules": "node tests/261009_0513_modules-browser.mjs",
+    "test:browser:tracks": "node tests/261009_0536_tracks-browser.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1",
+    "playwright": "1.62.1",
+    "wrangler": "4.132.0",
+    "ws": "^8.18.3"
+  },
+  "dependencies": {
+    "@8thwall/engine-binary": "1.0.0",
+    "leaflet": "1.9.4",
+    "three": "0.180.0"
+  }
+}

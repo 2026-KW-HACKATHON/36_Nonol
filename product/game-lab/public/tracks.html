@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow"><meta name="referrer" content="no-referrer">
+  <title>고정 코스 시험 | 노놀 Test Lab</title>
+  <link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/vendor/leaflet.css"><link rel="stylesheet" href="/261009_0536_tracks.css">
+</head>
+<body><main>
+  <header class="top"><a class="brand" href="/">노놀<span>TEST LAB</span></a><a class="back-link" href="/">방 목록 ↗</a></header>
+  <p class="eyebrow">TRACK TEST / 고정 코스 검증</p>
+  <h1>장소는 고정.<br>정령 따라 카페로.</h1>
+  <p class="intro">모듈을 연결해 광운대 묵언수행을 시험합니다.<br>장소, 사진과 스토리를 한 번 저장하면 같은 코스로 반복할 수 있어요.</p>
+  <ol class="course-flow"><li><span>01 / 복지관 = 이층집</span>식사 후 함께 출발</li><li><span>02 / 광운스퀘어 = 우이천 초입</span>지도 도착, 에어팟 사진 인증</li><li><span>03 / 비마관 앞 = 솥고집 정령</span>묵언 산책, 정령과 대화</li><li><span>04 / 풋살장 = 카페</span>정령의 추천, 거리와 방향으로 탐색</li></ol>
+  <section class="mapping-section" aria-labelledby="mapping-heading"><h2 id="mapping-heading">학교에서 실제 트랙을 이렇게 시험해요</h2><div class="mapping-scroll"><table class="mapping-table"><thead><tr><th scope="col">묵언수행 장소</th><th scope="col">학교 테스트 장소</th><th scope="col">확인할 경험</th></tr></thead><tbody><tr><th scope="row">이층집</th><td>복지관</td><td>식사 후 게임 출발</td></tr><tr><th scope="row">우이천 초입</th><td>광운스퀘어</td><td>지도 도착, 사진 인증</td></tr><tr><th scope="row">우이천 산책 구간</th><td>광운스퀘어 → 비마관 앞</td><td>AR 이동, 묵언 신고</td></tr><tr><th scope="row">솥고집 정령</th><td>비마관 앞</td><td>정령을 만나 카페 추천 받기</td></tr><tr><th scope="row">카페</th><td>풋살장</td><td>거리와 방향 탐색, 도착 후 벌점 정산</td></tr></tbody></table></div></section>
+  <p id="track-state" class="state-note" role="status">트랙 설정을 불러오고 있습니다.</p>
+  <div class="admin-bar"><button id="track-admin-open" type="button" class="button">관리자 로그인</button><button id="track-admin-logout" type="button" class="button" hidden>관리자 로그아웃</button><p id="track-admin-note" class="note"></p></div>
+  <section class="track-section" aria-labelledby="points-heading"><p class="eyebrow">ONE-TIME SETUP</p><h2 id="points-heading">지도에서 네 지점 고르기</h2><p class="note">장소를 선택한 뒤 지도를 눌러 위치를 지정하세요. 다시 누르면 옮길 수 있어요. 해당 장소에 계시면 현재 위치로 지정할 수도 있습니다.</p>
+    <form id="track-form">
+      <label for="track-active-place">지금 지정할 장소</label><select id="track-active-place"><option value="welfare">복지관 / 이층집</option><option value="square">광운스퀘어 / 우이천 초입</option><option value="bima">비마관 앞 / 솥고집 정령</option><option value="futsal">풋살장 / 카페</option></select>
+      <p id="track-place-status" class="selected-place-note" role="status"></p>
+      <div id="track-map" aria-label="네 장소의 기준점 선택 지도"></div><p id="track-map-status" class="note" role="status"></p>
+      <div class="location-actions"><button id="track-location-connect" type="button" class="button">현재 위치 연결</button><button id="track-center-gps" type="button" class="button" disabled>내 위치로 지도 이동</button></div>
+      <p id="track-gps-status" class="note" role="status">현재 위치를 확인하고 있습니다. 위치 권한이 없어도 지도에서 장소를 고를 수 있어요.</p>
+      <button id="track-current-gps" type="button" class="button" disabled>선택한 장소를 현재 위치에 지정</button>
+      <p id="track-place-feedback" class="note" role="status"></p>
+      <div id="track-place-fields" aria-label="장소 지정 상태와 도착 반경"></div>
+      <h2>고정 기준 사진</h2><p class="note">에어팟이 잘 보이는 실제 사진을 등록해 주세요. 모든 새 방에서 이 원본과 촬영한 물체를 비교합니다.</p>
+      <label for="track-reference-file">에어팟 기준 사진</label><input id="track-reference-file" type="file" accept="image/jpeg,image/png,image/webp">
+      <img id="track-reference-preview" alt="고정 에어팟 기준 사진" hidden><p id="track-reference-status" class="note" role="status"></p>
+      <details class="spatial-settings"><summary>바닥 고정 AR 프로젝트 연결</summary><p class="note">광운스퀘어에서 비마관 앞까지의 공간을 스캔한 프로젝트를 연결합니다.</p><label for="track-spatial-url">Mattercraft 프로젝트 주소</label><input id="track-spatial-url" type="url" placeholder="https://"><label for="track-spatial-map-id">Immersal Map ID</label><input id="track-spatial-map-id" maxlength="100"><a href="/spatial-route">공간 스캔과 바닥 경로 준비 ↗</a><p class="note spatial-scan-next">광운스퀘어 → 비마관 앞의 짧은 구간을 스캔한 뒤 Map ID를 등록해 주세요.</p></details>
+      <p class="note">정령이 카페를 추천하는 스토리와 풋살장 도착 코스는 고정입니다. 저장한 새 버전은 이후 생성하는 방에 적용됩니다.</p>
+      <button id="track-save" class="button start" type="submit">트랙 설정 저장</button><p id="track-save-status" class="note" role="status"></p>
+    </form>
+  </section>
+  <section class="track-section" aria-labelledby="start-heading"><p class="eyebrow">TEAM RUN</p><h2 id="start-heading">이 코스로 테스트 방 만들기</h2><p class="note">팀원이 같은 링크로 입장하고 전원 준비 후 팀장이 시작합니다. 한 명도 시험할 수 있습니다.</p>
+    <form id="track-room-form"><label for="track-room-title">테스트 방 이름</label><input id="track-room-title" maxlength="80" value="광운대 묵언수행 현장 테스트" required><button id="track-create-room" class="button primary" type="submit" disabled>고정 코스 테스트 방 만들기 ↗</button></form>
+    <p id="track-room-status" class="note" role="status"></p><div id="track-room-result" hidden><a id="track-room-link" class="button start">방 들어가기 ↗</a><label for="track-room-url">팀원에게 공유할 링크</label><input id="track-room-url" readonly><button id="track-copy-link" type="button" class="button">링크 복사</button></div>
+  </section>
+  <section class="track-section" aria-labelledby="map-settings-heading"><h2 id="map-settings-heading">카카오 지도 설정</h2><p id="kakao-state" class="note" role="status"></p>
+    <form id="kakao-form"><label for="kakao-js-key">카카오 JavaScript 키</label><input id="kakao-js-key" maxlength="32" autocomplete="off" placeholder="발급한 JavaScript 키"><button id="kakao-save" class="button" type="submit">지도 키 저장</button><p id="kakao-save-status" class="note" role="status"></p></form>
+    <p class="note">카카오 개발자 콘솔에서 카카오맵 사용 설정을 켜고, JavaScript 키의 SDK 도메인에 이 사이트 주소를 등록합니다. JavaScript 키는 브라우저에서 사용되는 공개 설정입니다.</p><p class="domain-note">https://nonol-game-lab.1991knet.workers.dev</p><a href="https://developers.kakao.com/docs/ko/kakaomap/common" target="_blank" rel="noopener noreferrer">카카오 지도 설정 안내 ↗</a>
+  </section>
+  <p id="track-error" class="error" role="alert"></p><footer><span>실제 코스. 같은 설정. 함께 검증.</span><span>TEST. TOGETHER.</span></footer>
+</main>
+<dialog id="track-admin-dialog" aria-labelledby="track-admin-heading"><h2 id="track-admin-heading">관리자 로그인</h2><form id="track-admin-login"><label for="track-admin-password">관리자 비밀번호</label><input id="track-admin-password" type="password" autocomplete="current-password" required><button class="button start" type="submit">로그인</button><p id="track-admin-error" class="error" role="alert"></p></form><button id="track-admin-close" type="button">닫기</button></dialog>
+<script src="/vendor/leaflet.js"></script><script type="module" src="/261009_0536_tracks.js"></script>
+</body></html>

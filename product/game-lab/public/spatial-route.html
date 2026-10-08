@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff">
+  <title>공간 AR 길 안내 준비 | 노놀 Test Lab</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/261009_0355_spatial-route.css">
+</head>
+<body>
+  <main>
+    <header class="top"><a class="brand" href="/">노놀<span>TEST LAB</span></a><span class="connection" role="status">공간 AR 준비</span></header>
+    <section class="spatial-intro" aria-labelledby="spatial-heading">
+      <p class="eyebrow">TEST LAB / MATTERCRAFT + IMMERSAL</p>
+      <h1 id="spatial-heading">공간 AR 길 안내,<br>준비부터.</h1>
+      <p class="intro">광운스퀘어에서 비마관 앞까지를 우이천으로 삼아 바닥에 경로를 고정합니다. 첫 시험은 이 구간 중 10~20m만 스캔해 주세요.</p>
+      <div class="spatial-state"><h2>지도 스캔 전, 연결 모듈 준비</h2><p>실제 현장의 AR 바닥 고정과 재인식은 아직 검증 전입니다.</p></div>
+    </section>
+    <section class="spatial-requirements" aria-labelledby="spatial-requirements-heading">
+      <h2 id="spatial-requirements-heading">필수 준비물</h2>
+      <ul><li>스캔한 공간의 Map ID</li><li>Mattercraft 프로젝트</li><li>현장에서 시험할 휴대폰</li></ul>
+    </section>
+    <section class="spatial-preparation" aria-labelledby="spatial-checklist-heading">
+      <div class="spatial-section-heading"><h2 id="spatial-checklist-heading">3단계 준비 체크</h2><span id="spatial-progress" role="status" aria-live="polite">0/3 표시</span></div>
+      <ol class="spatial-steps">
+        <li>
+          <h3><span>01</span> 공간 스캔과 Map ID</h3>
+          <p>가입과 앱 설치를 마쳤다면 Mapper에 로그인하고 하단 촬영 버튼으로 새 지도를 만듭니다. Manual 모드를 선택해 주세요.</p>
+          <p>광운스퀘어에서 비마관 방향의 짧은 구간을 밝은 환경에서 걸으며 촬영합니다. 바닥과 함께 건물, 계단 등의 고정된 특징을 담고 사진끼리 약 절반이 겹치게 찍습니다. 같은 특징이 세 장 이상에 담기도록 다른 위치에서도 촬영해 주세요.</p>
+          <p>촬영 완료 후 지도 이름을 NonolSquareBima01처럼 영문과 숫자로 정해 저장합니다. Mapper 2.0에서는 On Device에서 지도를 열고 upload로 서버에 올립니다. 기존 앱에서는 완료 표시 후 바로 업로드됩니다.</p>
+          <p>Developer Portal에서 처리 상태가 done이 되면 Map ID를 복사하고 <a href="/tracks">고정 코스 설정의 Immersal Map ID</a>에 저장합니다. 완성된 지도를 앱에서 내려받아 AR 및 Localize로 같은 장소의 재인식을 확인합니다. Map ID 등록 후 Mattercraft 프로젝트를 연결하는 단계가 이어집니다.</p>
+          <a class="spatial-doc" href="https://developers.immersal.com/docs/mapsmapping/howtomap/mapper-2.0/" target="_blank" rel="noopener noreferrer">Mapper 2.0의 저장, AR 시험 및 업로드 화면 ↗</a>
+          <a class="spatial-doc" href="https://developers.immersal.com/docs/mapsmapping/howtomap/" target="_blank" rel="noopener noreferrer">겹치는 사진과 고정된 특징 촬영 안내 ↗</a>
+          <a class="spatial-doc" href="https://docs.zap.works/mattercraft/vps/immersal/immersal-create-map/" target="_blank" rel="noopener noreferrer">공식 스캔 안내와 설치 링크 ↗</a>
+          <label class="spatial-check" for="spatial-check-scan"><input id="spatial-check-scan" type="checkbox" data-check="scan"><span>스캔을 마치고 Map ID를 확보했습니다.</span></label>
+        </li>
+        <li>
+          <h3><span>02</span> 프로젝트 연결과 경로 배치</h3>
+          <p>Mattercraft의 Immersal Blank (with Splash) 템플릿을 엽니다. 본인의 프로젝트에서 ImmersalAnchorGroup에 Developer Token과 Map ID를 설정합니다.</p>
+          <p>아래 연결 소스를 사용해 맵 좌표에 경유점과 바닥 화살표를 배치합니다. 미리 지정한 경로를 시험하며 실시간 경로 자동 계산은 제공하지 않습니다.</p>
+          <p class="note">개발 토큰은 본인 Mattercraft 프로젝트에서 설정해 주세요. 이 페이지는 토큰을 입력받거나 저장하지 않습니다.</p>
+          <a class="spatial-doc" href="https://docs.zap.works/mattercraft/vps/immersal/immersal-add-map/" target="_blank" rel="noopener noreferrer">공식 프로젝트 연결 안내 ↗</a>
+          <label class="spatial-check" for="spatial-check-project"><input id="spatial-check-project" type="checkbox" data-check="project"><span>지도를 연결하고 시험 경로를 배치했습니다.</span></label>
+        </li>
+        <li>
+          <h3><span>03</span> 현장에서 재인식 시험</h3>
+          <p>스캔한 구간에서 휴대폰으로 프로젝트를 열고 같은 공간을 다시 인식하는지 확인합니다. 걸으며 바닥의 경로가 같은 위치에 유지되는지 시험해 주세요.</p>
+          <p>다른 각도와 조명에서도 재인식과 바닥 고정을 확인합니다.</p>
+          <label class="spatial-check" for="spatial-check-field"><input id="spatial-check-field" type="checkbox" data-check="field"><span>현장에서 재인식과 바닥 고정을 시험했습니다.</span></label>
+        </li>
+      </ol>
+      <p id="spatial-check-status" class="note" role="status">체크 표시를 이 브라우저에 보관합니다.</p>
+      <p id="spatial-storage-status" class="error" role="alert"></p>
+    </section>
+    <section class="spatial-downloads" aria-labelledby="spatial-downloads-heading">
+      <h2 id="spatial-downloads-heading">연결 소스 받기</h2>
+      <p class="note">네 파일을 프로젝트의 같은 폴더에 추가합니다. Immersal 앵커 아래 Group의 사용자 Behavior에서 attachMattercraftFloorRoute(contextManager, instance)를 호출합니다. JSON의 Map ID와 실제 바닥 좌표를 채운 뒤 confirmed를 true로 바꿔 주세요.</p>
+      <div class="spatial-actions">
+        <a id="spatial-download-route" class="button start" href="/spatial-route/261009_0355_floor-route.js" download>바닥 경로 모듈 <span aria-hidden="true">↓</span></a>
+        <a id="spatial-download-bridge" class="button primary" href="/spatial-route/261009_0355_mattercraft-bridge.js" download>공간 좌표 연결 모듈 <span aria-hidden="true">↓</span></a>
+        <a id="spatial-download-example" class="button primary" href="/spatial-route/261009_0355_route-example.json" download>미리 지정한 경로 예시 <span aria-hidden="true">↓</span></a>
+        <a id="spatial-download-behavior" class="button primary" href="/spatial-route/261009_0355_MattercraftFloorRoute.ts" download>Mattercraft 실행 모듈 <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+    <footer><span>노놀 팀의 모바일 게임 모듈 검증</span><a href="/">전체 테스트 방 보기</a></footer>
+  </main>
+  <script type="module" src="/261009_0355_spatial-route-page.js"></script>
+</body>
+</html>

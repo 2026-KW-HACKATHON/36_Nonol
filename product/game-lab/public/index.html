@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff">
+  <title>모바일 게임 모듈 테스트 | 노놀 Test Lab</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/vendor/leaflet.css">
+  <link rel="stylesheet" href="/lab.css">
+  <link rel="stylesheet" href="/261009_0159_home.css">
+  <link rel="stylesheet" href="/261009_0320_registration.css">
+</head>
+<body>
+  <main>
+    <header class="top"><span class="brand">노놀<span>TEST LAB</span></span><span id="connection" class="connection" role="status">연결 준비 중</span></header>
+    <section id="home" hidden aria-labelledby="home-heading">
+      <div class="home-intro"><p class="eyebrow">TEST LAB / ROOMS</p><h1 id="home-heading">테스트할 방,<br>골라 주세요.</h1><p class="intro">같은 방에서 모여 모바일 퀘스트 모듈을 시험합니다.<br>들어오신 다음, 준비 완료 후 각종 테스트를 시작할 수 있어요.</p></div>
+      <p id="home-notice" class="note" role="status"></p>
+      <a class="button start registration-link" href="/tracks">고정 코스 연결 테스트 <span aria-hidden="true">↗</span></a>
+      <a class="note home-link" href="/spatial-route">바닥 고정 AR 길 안내 준비 ↗</a>
+      <div class="home-tools"><button id="rooms-refresh" class="button start" type="button">목록 새로고침 <span aria-hidden="true">↻</span></button><button id="admin-open" class="button primary" type="button">관리자 로그인 <span aria-hidden="true">↗</span></button><button id="admin-logout" class="button primary" type="button" hidden>관리자 로그아웃 <span aria-hidden="true">↗</span></button></div>
+      <p id="admin-status" class="note" role="status"></p>
+      <a id="groups-open" class="button start registration-link" href="/groups" hidden>신청 그룹과 개인 링크 만들기 <span aria-hidden="true">↗</span></a>
+      <form id="rooms-search" class="rooms-search" role="search"><label for="rooms-query">방 이름 검색</label><div><input id="rooms-query" type="search" maxlength="80" placeholder="찾으실 테스트 방 이름"><button type="submit">검색</button></div></form>
+      <p id="rooms-status" class="note" role="status" aria-live="polite">방 목록을 불러오고 있습니다.</p>
+      <ul id="room-list" class="room-list" aria-label="테스트 방 목록"></ul>
+      <button id="rooms-more" class="button" type="button" hidden>방 더 보기 <span aria-hidden="true">↓</span></button>
+      <p id="rooms-error" class="error" role="alert"></p>
+    </section>
+    <dialog id="admin-dialog" aria-labelledby="admin-heading">
+      <h2 id="admin-heading">관리자 로그인</h2><p class="note">관리자는 팀장과 관계없이 방을 삭제할 수 있습니다.</p>
+      <form id="admin-login"><label for="admin-password">관리자 비밀번호</label><input id="admin-password" type="password" autocomplete="current-password" required maxlength="256"><button id="admin-submit" class="button start" type="submit">관리자 로그인 <span aria-hidden="true">↗</span></button><p id="admin-error" class="error" role="alert"></p></form>
+      <button id="admin-cancel" type="button">닫기</button>
+    </dialog>
+    <section id="entry" class="entry" aria-labelledby="entry-heading">
+      <p class="eyebrow">TEST LAB / 모바일 게임 모듈 검증</p>
+      <div class="glasses" aria-hidden="true"><span></span><span></span></div>
+      <h1 id="entry-heading">모여서,<br>시험해 봅시다.</h1>
+      <p class="intro">핸드폰으로 지도, 사진 인증, 신고와 AR 모듈을 검증합니다.<br>혼자도 준비 완료 후 시작할 수 있어요.</p>
+      <form id="join-form" hidden>
+        <label for="nickname">오늘 사용할 닉네임</label>
+        <input id="nickname" name="nickname" maxlength="24" autocomplete="nickname" placeholder="친구들이 알아볼 수 있는 이름" required>
+        <button id="join-button" class="button primary" type="submit">대기실 들어가기 <span aria-hidden="true">↗</span></button>
+      </form>
+      <button id="retry-button" class="button primary retry" type="button" hidden>다시 연결하기 <span aria-hidden="true">↻</span></button>
+      <p class="note" id="entry-note">초대 정보를 확인하고 있습니다.</p>
+      <p id="personal-browser-guide" class="note" hidden>카카오톡에서 열었다면 상단 메뉴에서 다른 브라우저로 열기를 선택해 주세요. 개인 링크를 Chrome에서 열고 같은 브라우저로 노놀판을 확인하면 됩니다.</p>
+      <a class="note home-link" href="/">전체 테스트 방 보기 ↗</a>
+    </section>
+    <section id="lobby" hidden aria-labelledby="lobby-heading">
+      <div class="lobby-intro"><p class="eyebrow">TEST LAB / TEAM LOBBY</p><h1 id="lobby-heading" tabindex="-1">준비되면,<br>시작해 봅시다.</h1><p id="room-title" class="intro"></p><p id="lobby-guide" class="note">같은 링크로 입장 → 각자 준비 완료 → 팀장 시작.<br>1명부터 시험할 수 있고, 처음 입장한 분이 팀장입니다.</p></div>
+      <div class="progress"><p><strong id="ready-count">0/0</strong><span>준비 완료</span></p><p id="ready-message" role="status" aria-live="polite"></p></div>
+      <div class="list-heading"><h2>오늘의 팀</h2><span id="member-count"></span></div>
+      <ul id="members" class="members" aria-label="참가자와 준비 상태"></ul>
+      <section id="registration-panel" class="registration-panel" hidden aria-labelledby="registration-heading">
+        <h2 id="registration-heading">식사 후, 노놀판 확인</h2>
+        <p class="note">식사를 마치면 나가기 전에 각자 노놀판에 휴대폰을 대 주세요.</p>
+        <p id="registration-progress" class="note" role="status" aria-live="polite"></p>
+        <ul id="registration-people" class="registration-people" aria-label="신청자별 노놀판 확인 상태"></ul>
+        <a id="registration-board" class="button start" href="/board?board=icheungjip-lab">내 노놀판 확인 시험하기 <span aria-hidden="true">↗</span></a>
+      </section>
+      <div class="actions">
+        <button id="ready-button" class="button primary" aria-pressed="false">준비 완료 <span aria-hidden="true">✓</span></button>
+        <button id="start-button" class="button start" hidden disabled>테스트 시작하기 <span aria-hidden="true">↗</span></button>
+        <p id="leader-note" class="note"></p>
+      </div>
+      <aside id="lab-settings" hidden>
+        <p class="note">시작 후 각 모듈에서 팀장이 장소와 테스트 기준을 설정합니다. 저장한 설정으로 전원이 함께 시험합니다.</p>
+      </aside>
+    </section>
+    <section id="started" class="started" hidden aria-labelledby="started-heading">
+      <p class="eyebrow">TRACK 01 / START</p><span class="start-stamp" aria-hidden="true">GO!</span>
+      <h1 id="started-heading" tabindex="-1">묵언수행,<br>출발합니다.</h1>
+      <p class="intro">오늘의 시작은 이층집.<br>일단 든든하게 밥부터 먹어요.</p>
+      <div class="start-team"><h2>함께 출발한 팀</h2><p id="started-members"></p></div>
+    </section>
+    <p id="error" class="error" role="alert"></p>
+    <footer><span>노놀 팀의 모바일 게임 모듈 검증</span><span>TEST. TOGETHER.</span></footer>
+  </main>
+  <script src="/vendor/leaflet.js"></script><script type="module" src="/app.js"></script>
+</body>
+</html>

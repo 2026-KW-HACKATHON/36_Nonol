@@ -1,0 +1,35 @@
+.top .brand { color: var(--ink); text-decoration: none; }
+.registration-intro { padding: 32px 0 10px; }
+.registration-intro h1 { font-size: clamp(36px, 7vw, 54px); }
+.registration-intro .intro { margin-top: 18px; }
+.registration-link { text-decoration: none; margin-top: 20px; }
+#groups-form, #board-link-form { max-width: 520px; }
+.registration-date { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.registration-date > div { min-width: 0; }
+.registration-date input { min-width: 0; }
+textarea { width: 100%; margin: 8px 0 4px; padding: 12px; border: 1px solid #8a9284; border-radius: 5px; font: inherit; color: var(--ink); background: #fff; resize: vertical; }
+#groups-create { margin-top: 20px; }
+.registration-result { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--ink); }
+.registration-result > h2 { font-size: 22px; }
+.registration-links, .board-people { list-style: none; padding: 0; margin: 20px 0; }
+.registration-links li { padding: 18px 0; border-bottom: 1px solid var(--line); }
+.registration-links h3 { margin: 0; font-size: 15px; overflow-wrap: anywhere; }
+.registration-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; margin-top: 10px; }
+.registration-copy input { margin: 0; padding: 10px 0; font-size: 12px; }
+.registration-copy button, .registration-secondary { min-height: 44px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 5px; background: #fff; color: var(--ink); font: inherit; font-size: 13px; }
+.registration-copy button:disabled, .registration-secondary:disabled { opacity: .45; cursor: default; }
+.registration-shared { margin-top: 24px; }
+.registration-shared h2 { font-size: 16px; }
+.board-person { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--ink); }
+.board-name { font-size: 28px; font-weight: 850; overflow-wrap: anywhere; margin: 10px 0 18px; }
+.board-person .registration-secondary { margin-top: 12px; }
+.board-people li { display: flex; justify-content: space-between; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.board-people li span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.board-people li span:last-child { font-size: 12px; color: var(--muted); text-align: right; }
+.board-people li[data-tagged=true] span:last-child { color: var(--deep); }
+.registration-footnote { margin-top: 32px; }
+#registration-panel { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+.registration-people { list-style: none; margin: 14px 0; padding: 0; }
+.registration-people li { display: flex; justify-content: space-between; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 13px; overflow-wrap: anywhere; }
+footer a { color: var(--deep); }
+@media (max-width: 360px) { .registration-date { grid-template-columns: 1fr; gap: 0; } .registration-copy { gap: 8px; } .registration-copy button { padding: 10px; } }

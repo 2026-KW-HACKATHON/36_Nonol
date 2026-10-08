@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nonol-game-lab",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-22",
+  "ai": { "binding": "AI", "remote": true },
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "ROOMS", "class_name": "GameRoom" }, { "name": "LAB_DIRECTORY", "class_name": "LabDirectory" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["GameRoom"] }, { "tag": "v2", "new_sqlite_classes": ["LabDirectory"] }]
+}

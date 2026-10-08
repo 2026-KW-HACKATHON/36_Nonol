@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff">
+  <title>개인 노놀판 확인 | 노놀 Test Lab</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/261009_0320_registration.css">
+</head>
+<body>
+  <main>
+    <header class="top"><a class="brand" href="/">노놀<span>TEST LAB</span></a><span id="board-connection" class="connection" role="status">입장 정보 확인 중</span></header>
+    <section class="registration-intro" aria-labelledby="board-heading">
+      <p class="eyebrow">TEST LAB / NONOL BOARD</p>
+      <h1 id="board-heading">내 이름으로,<br>노놀판 확인.</h1>
+      <p class="intro">개인 링크로 입장한 브라우저에서 본인 이름을 확인해 주세요.</p>
+    </section>
+    <section id="board-person" class="board-person" hidden aria-labelledby="board-person-heading">
+      <h2 id="board-person-heading">확인할 신청자</h2>
+      <p id="board-name" class="board-name"></p>
+      <button id="board-submit" class="button start" type="button" disabled>노놀판 확인하기 <span aria-hidden="true">✓</span></button>
+      <button id="board-change" class="registration-secondary" type="button">다른 개인 링크 확인</button>
+    </section>
+    <form id="board-link-form" hidden>
+      <label for="board-invite">본인의 개인 초대 링크</label><input id="board-invite" type="url" required autocomplete="off" spellcheck="false" placeholder="전달받은 개인 링크를 붙여 넣어 주세요">
+      <button id="board-join" class="button primary" type="submit">내 이름 확인하기 <span aria-hidden="true">↗</span></button>
+      <p class="note">신청자별로 발급된 개인 링크를 사용해 주세요.</p>
+    </form>
+    <button id="board-retry" class="button primary" type="button" hidden>입장 정보 다시 확인 <span aria-hidden="true">↻</span></button>
+    <p id="board-status" class="note" role="status" aria-live="polite"></p>
+    <p id="board-error" class="error" role="alert"></p>
+    <section id="board-result" class="registration-result" hidden aria-labelledby="board-result-heading">
+      <h2 id="board-result-heading" tabindex="-1">팀 노놀판 확인 현황</h2>
+      <p id="board-result-summary" class="note"></p>
+      <ul id="board-people" class="board-people" aria-label="신청자별 노놀판 확인 상태"></ul>
+      <a id="board-lobby" class="button primary registration-link" href="/">같은 대기실로 이동 <span aria-hidden="true">↗</span></a>
+    </section>
+    <p class="note registration-footnote">NFC 태그에 저장한 링크를 열거나 이 버튼으로 같은 확인을 시험할 수 있어요. 실제 태그 접촉 여부는 확인하지 않습니다.</p>
+    <footer><span>노놀 팀의 모바일 게임 모듈 검증</span><a href="/">전체 테스트 방 보기</a></footer>
+  </main>
+  <script type="module" src="/261009_0320_board.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff">
+  <title>신청자 개인 링크 발급 | 노놀 Test Lab</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/261009_0320_registration.css">
+</head>
+<body>
+  <main>
+    <header class="top"><a class="brand" href="/">노놀<span>TEST LAB</span></a><span id="groups-connection" class="connection" role="status">관리자 확인 중</span></header>
+    <section class="registration-intro" aria-labelledby="groups-heading">
+      <p class="eyebrow">TEST LAB / PERSONAL LINKS</p>
+      <h1 id="groups-heading">같이 신청하고,<br>각자 입장해요.</h1>
+      <p class="intro">신청자마다 이름이 연결된 개인 링크를 발급합니다.</p>
+    </section>
+    <p id="groups-auth-status" class="note" role="status"></p>
+    <a id="groups-login" class="button primary registration-link" href="/" hidden>홈에서 관리자 로그인 <span aria-hidden="true">↗</span></a>
+    <button id="groups-auth-retry" class="button start" type="button" hidden>관리자 연결 다시 확인 <span aria-hidden="true">↻</span></button>
+    <form id="groups-form" hidden>
+      <label for="groups-title">시험할 팀 이름</label><input id="groups-title" maxlength="80" required placeholder="함께 시험할 팀">
+      <div class="registration-date"><div><label for="groups-date">날짜</label><input id="groups-date" type="date" required></div><div><label for="groups-time">시간</label><input id="groups-time" type="time" required></div></div>
+      <label for="groups-names">신청자 이름</label><textarea id="groups-names" rows="5" required placeholder="한 줄에 한 명씩 입력해 주세요"></textarea>
+      <p class="note">2명 이상 입력해 주세요. 이름은 각각 24자까지 사용할 수 있어요.</p>
+      <button id="groups-create" class="button start" type="submit">개인 링크 발급하기 <span aria-hidden="true">↗</span></button>
+    </form>
+    <p id="groups-status" class="note" role="status"></p>
+    <p id="groups-error" class="error" role="alert"></p>
+    <section id="groups-result" class="registration-result" hidden aria-labelledby="groups-result-heading">
+      <h2 id="groups-result-heading" tabindex="-1">발급된 개인 링크</h2>
+      <p id="groups-result-summary" class="note"></p>
+      <p class="note">각 신청자에게 본인의 개인 링크를 전달해 주세요.</p>
+      <ul id="groups-participants" class="registration-links" aria-label="신청자별 개인 링크"></ul>
+      <div class="registration-shared"><h2>노놀판 링크</h2><p class="note">이 주소를 NFC 태그에 저장하거나 브라우저에서 열어 확인할 수 있어요.</p><div id="groups-board-link"></div></div>
+      <div class="registration-shared"><h2>공통 대기실 링크</h2><p class="note">개인 링크로 입장한 뒤 같은 대기실에서 준비합니다.</p><div id="groups-room-link"></div></div>
+      <p id="groups-copy-status" class="note" role="status" aria-live="polite"></p>
+    </section>
+    <footer><span>노놀 팀의 모바일 게임 모듈 검증</span><a href="/">전체 테스트 방 보기</a></footer>
+  </main>
+  <script type="module" src="/261009_0320_groups.js"></script>
+</body>
+</html>

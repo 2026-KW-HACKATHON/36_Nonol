@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="strict-origin"><meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff"><title>모바일 퀘스트 모듈 테스트 | 노놀 Test Lab</title>
+  <link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/vendor/leaflet.css"><link rel="stylesheet" href="/lab.css">
+</head>
+<body>
+<main>
+  <header class="top"><span class="brand">노놀<span>TEST TRACK</span></span><span id="connection" class="connection" role="status">팀에 연결하는 중</span></header>
+  <p id="lab-track-title" class="lab-track-title"></p>
+  <p id="mode-label" class="mode-label"></p>
+  <nav id="steps" class="steps" aria-label="테스트 진행 단계"></nav>
+  <aside id="stage-controls" class="stage-controls" aria-labelledby="stage-controls-heading" hidden>
+    <h2 id="stage-controls-heading">팀장 테스트 조작</h2>
+    <p class="note">팀 전체가 함께 이동하며 이동한 단계의 완료 기록을 다시 시작합니다. 팀장은 위에서 모듈을 골라 바로 시험할 수도 있습니다.</p>
+    <div class="button-row"><button id="stage-previous" type="button" data-stage-control="previous">이전 단계</button><button id="stage-next" type="button" data-stage-control="next">다음 단계</button><button id="stage-reset" type="button" data-stage-control="reset">현재 단계 초기화</button></div>
+    <p id="stage-control-status" class="note" role="status"></p>
+  </aside>
+  <section class="mission" aria-labelledby="mission-heading">
+    <p id="stage-number" class="eyebrow"></p><h1 id="mission-heading" tabindex="-1">연결하고 있어요.</h1><p id="mission-copy" class="intro"></p>
+    <div id="map-panel" hidden>
+      <div id="map" aria-label="팀원 위치와 다음 목적지 지도"></div>
+      <p id="map-arrival-status" class="map-arrival note" role="status" data-state="waiting">현재 위치를 확인하고 있어요.</p>
+      <p id="map-status" class="note" role="status">출발과 도착 사이의 테스트 연결선입니다. 실제 보행 경로는 현장에서 확인해 주세요.</p>
+      <button id="map-complete" class="button primary" data-complete="map">도착했어요</button>
+    </div>
+    <div id="photo-panel" hidden>
+    <section id="reference-photo" class="reference-photo" aria-labelledby="reference-heading" hidden>
+      <h2 id="reference-heading">인증 기준 사진</h2>
+      <p id="reference-caption" class="reference-caption"></p>
+      <img id="reference-image" class="reference-image" alt="인증 기준 사진" hidden>
+      <p id="reference-note" class="note" role="status"></p>
+      <button id="reference-reload" class="reference-reload" type="button">기준 사진 다시 확인</button>
+      <details id="reference-editor" hidden>
+        <summary>팀장: 기준 사진 바꾸기</summary>
+        <form id="reference-form">
+          <label for="reference-label">기준 물체 이름</label><input id="reference-label" maxlength="80" required>
+          <label for="reference-file">기준 사진 선택</label><input id="reference-file" type="file" accept="image/jpeg,image/png,image/webp">
+          <img id="reference-draft" class="reference-image" alt="저장할 기준 사진 미리보기" hidden>
+          <button id="reference-save" class="button start" type="submit" disabled>기준 사진 저장</button>
+          <p class="note">기준 사진은 이 방에 저장되어 참가자에게 공유됩니다. 언제든 팀장이 바꿀 수 있어요. 저장하면 전원의 사진 테스트가 다시 시작됩니다.</p>
+          <p id="reference-status" class="note" role="status"></p>
+        </form>
+      </details>
+    </section>
+      <button id="photo-pick" type="button" class="button photo-pick" aria-haspopup="dialog" aria-controls="photo-source-dialog">사진 촬영 또는 선택 <span aria-hidden="true">↗</span></button>
+      <input id="photo-file" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+      <input id="photo-camera-file" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" hidden>
+      <dialog id="photo-source-dialog" class="photo-source-dialog" aria-labelledby="photo-source-heading">
+        <h2 id="photo-source-heading">사진을 어떻게 준비할까요?</h2>
+        <div class="photo-source-actions">
+          <button id="photo-camera-pick" type="button" class="button start" autofocus>사진 촬영 <span aria-hidden="true">↗</span></button>
+          <button id="photo-library-pick" type="button" class="button">이미지 선택 <span aria-hidden="true">↗</span></button>
+          <button id="photo-source-cancel" type="button" class="photo-source-cancel">취소</button>
+        </div>
+      </dialog>
+      <img id="photo-preview" alt="제출할 인증 사진 미리보기" hidden>
+      <button id="photo-submit" class="button primary" disabled>사진으로 인증하기</button>
+      <p class="note">제출 사진은 Cloudflare AI로 전송해 물체를 판정하며, 게임 서버는 제출 사진 원본을 저장하지 않습니다. 기준 사진은 방에 저장됩니다. 이 모듈은 기준 물체의 인식 여부만 시험합니다.</p>
+      <p id="photo-status" class="note" role="status"></p>
+
+    </div>
+    <div id="silence-panel" hidden>
+      <p class="silence-mark" aria-hidden="true">쉿.</p><section id="report-console" class="report-console" aria-labelledby="report-console-heading"><h2 id="report-console-heading">묵언 신고</h2><p class="note">말한 팀원을 선택해 신고해 보세요. 신고마다 벌점 1점이 쌓입니다. 같은 사람을 기다림 없이 여러 번 신고할 수 있어요.</p>
+      <div id="report-members" class="report-members"></div><p id="report-status" class="note" role="status"></p></section>
+      <button id="silence-complete" class="button primary" data-complete="silence">묵언 구간을 걸었어요</button>
+    </div>
+    <div id="npc-panel" hidden>
+      <p id="npc-mode" class="npc-mode" role="status">정령 모드를 확인하고 있습니다.</p>
+      <p id="ar-capability" class="note" role="status">공간 AR 지원 여부를 확인하고 있습니다.</p>
+      <p id="npc-instructions" class="note">지원 검사가 끝나면 정령 생성하기를 눌러 주세요. 카메라 2D로 진행하기도 선택할 수 있어요.</p>
+      <div id="npc-camera" class="npc-camera">
+        <video id="camera" autoplay playsinline muted aria-label="주변 카메라 화면"></video>
+        <p id="camera-label" class="camera-label">카메라 2D / 정령은 화면 위에 표시됩니다.</p>
+        <button id="npc-touch" class="spirit" aria-label="솥고집 정령 만나기">
+          <svg viewBox="0 0 220 220" aria-hidden="true"><path d="M65 70c-18-24 15-20 5-44M105 63c-18-24 15-20 5-44M145 70c-18-24 15-20 5-44" fill="none" stroke="#d7fb78" stroke-width="8" stroke-linecap="round"/><path d="M35 98h150l-15 68q-60 35-120 0Z" fill="#171b16"/><ellipse cx="110" cy="98" rx="82" ry="17" fill="#d7fb78" stroke="#171b16" stroke-width="7"/><path d="M46 115H22v24h24m128-24h24v24h-24" fill="none" stroke="#171b16" stroke-width="10"/><rect x="72" y="121" width="32" height="23" rx="6" fill="#fff"/><rect x="115" y="121" width="32" height="23" rx="6" fill="#fff"/><path d="M104 125h12" stroke="#fff" stroke-width="5"/><path d="M93 157q17 13 34 0" fill="none" stroke="#d7fb78" stroke-width="5" stroke-linecap="round"/></svg>
+          <span>정령 터치하기</span>
+        </button>
+      </div>
+      <button id="ar-start" class="button start" disabled>정령 생성하기</button>
+      <div class="button-row"><button id="camera-start">카메라 2D로 진행하기</button><button id="ar-stop" hidden>공간 AR 종료</button></div>
+      <p id="npc-placement-note" class="note">공간 AR은 카메라 앞에 정령을 바로 생성합니다. 정령은 이 기기에만 놓이며 GPS 좌표에 고정하는 방식은 아닙니다.</p>
+      <p class="note ar-license"><a href="/vendor/8thwall/LICENSE" target="_blank" rel="noopener">8th Wall © 2026 Niantic Spatial, Inc. / 라이선스 및 보증 조건</a></p>
+      <p id="camera-status" class="note" role="status"></p><p id="ar-status" class="note" role="status"></p>
+      <div id="ar-container"></div>
+      <div id="story" class="story" hidden><p class="eyebrow">솥고집 정령</p><p id="story-copy"></p><button id="story-next" class="button primary">다음 이야기</button></div>
+    </div>
+    <div id="ar-route-panel" hidden>
+      <section class="spatial-project" aria-labelledby="spatial-project-heading"><h2 id="spatial-project-heading">바닥에 고정되는 AR 경로</h2><p id="spatial-project-status" class="note" role="status"></p><a id="spatial-project-open" class="button start" target="_blank" rel="noopener" hidden>공간 AR 프로젝트 열기 <span aria-hidden="true">↗</span></a><a href="/spatial-route" class="spatial-preparation-link" target="_blank" rel="noopener">공간 스캔과 프로젝트 준비하기 ↗</a></section>
+      <h2 class="route-preview-heading">카메라 방향 안내 비교 테스트</h2>
+      <div id="route-camera" class="route-camera">
+        <video id="route-video" autoplay playsinline muted aria-label="길 안내 카메라 화면"></video>
+        <p class="camera-label">경유점 기반 카메라 안내 / 실제 도로에 고정된 표시는 아닙니다.</p>
+        <div id="route-overlay" class="route-overlay">
+          <div id="route-marker" class="route-marker" aria-hidden="true">↑</div>
+          <p id="route-distance" class="route-distance"></p>
+          <p id="route-direction" class="route-direction" role="status"></p>
+        </div>
+      </div>
+      <p id="route-progress" class="note"></p>
+      <p id="route-status" class="note" role="status"></p>
+      <div class="button-row"><button id="route-camera-start">길 안내 카메라 켜기</button><button id="route-heading-start">방향 센서 켜기</button></div>
+      <p id="route-camera-status" class="note" role="status"></p>
+      <button id="route-arrive" class="button primary">이 경유점에 도착했어요</button>
+      <p class="note">시험 경로: 출발과 도착의 중간 지점, 이어서 도착 위치. 실제 보행 경로는 현장에서 정해 주세요. 방향이 없으면 거리만 표시합니다.</p>
+    </div>
+    <div id="finder-panel" hidden>
+      <div id="finder" class="finder"><span id="finder-arrow" class="finder-arrow" aria-hidden="true">↑</span><p><span id="finder-distance">?</span><span class="unit">m</span></p><p id="finder-direction"></p></div>
+      <p id="finder-status" class="note" role="status"></p><button id="heading-start" class="button">방향 센서 켜기</button>
+      <button id="finder-complete" class="button primary" data-complete="finder">숨은 목적지를 찾았어요</button>
+      <p class="note">GPS와 방향 센서를 사용하는 테스트 안내입니다. AirTag의 정밀 탐색과는 정확도가 다릅니다.</p>
+    </div>
+    <div id="ending-panel" hidden><p id="ending-total" class="ending-total"></p><span class="start-stamp" aria-hidden="true">쉿!</span><p id="ending-story" class="intro"></p><ul id="scoreboard" class="members"></ul></div>
+    <section id="module-settings" class="module-settings" aria-labelledby="module-settings-heading">
+      <h2 id="module-settings-heading">모듈 테스트 설정</h2><p id="module-config-summary" class="module-config-summary"></p><p id="module-settings-note" class="note"></p>
+      <details id="module-settings-editor" hidden><summary>팀장: 이 모듈 설정하기</summary>
+        <form id="module-config-form">
+          <div data-module-field="photo"><label for="module-photo-target">인식할 물체 이름</label><input id="module-photo-target" data-config="photoTarget" maxlength="80" required></div>
+          <div data-module-field="map npc ar-route finder" class="module-map-editor">
+            <p class="note">지정할 지점을 고르고 지도를 눌러 주세요. 다시 누르면 핀 위치를 조정합니다.</p>
+            <div id="module-location-role" class="module-location-role" aria-label="지도에서 지정할 지점"><button type="button" data-location-role="start" aria-pressed="false">출발지</button><button type="button" data-location-role="destination" aria-pressed="false">목적지</button></div>
+            <p id="module-location-hint" class="note" role="status"></p><div id="module-location-map" class="module-location-map" aria-label="현재 위치와 출발지 및 목적지 선택 지도"></div>
+            <div class="module-map-actions"><button id="module-map-current" type="button" class="module-gps-button">내 위치 보기</button><button id="module-current-start" type="button" class="module-gps-button">현재 위치를 출발지로 지정</button><button id="module-map-fit" type="button" class="module-gps-button">모든 지점 보기</button></div>
+            <p id="module-map-gps-status" class="note" role="status"></p><div class="module-point-status"><span id="module-start-status"></span><span id="module-destination-status"></span></div>
+          </div>
+          <div data-module-field="map npc ar-route finder"><label for="module-radius">도착 반경 (m)</label><input id="module-radius" data-config="radius" type="number" min="5" max="100" step="1" required></div>
+          <div data-module-field="ar-route"><label for="module-spatial-project-url">Mattercraft 공간 AR 프로젝트 주소</label><input id="module-spatial-project-url" data-config="spatialProjectUrl" type="url" placeholder="https://"><label for="module-spatial-map-id">Immersal Map ID</label><input id="module-spatial-map-id" data-config="spatialMapId" maxlength="100"></div>
+          <button id="module-config-save" class="button start" type="submit">저장하고 함께 다시 시험하기</button><p id="module-config-status" class="note" role="status"></p>
+        </form>
+      </details>
+    </section>
+  </section>
+  <p id="location-status" class="location-status" role="status"></p>
+  <p id="sensor-status" class="note" role="status"></p>
+  <button id="gps-start" class="button" hidden>실제 위치 연결하기</button>
+  <p id="team-progress" class="team-progress" role="status"></p>
+  <ul id="team-status" class="team-status" aria-label="참가자 완료 상태"></ul>
+
+  <p id="error" class="error" role="alert"></p>
+  <button id="reset" class="reset" hidden>방 전체 초기화하기</button>
+  <footer><span>말은 아끼고. 테스트는 많이.</span><span>HAVE FUN. SAY LESS.</span></footer>
+</main>
+<script src="/vendor/leaflet.js"></script><script type="module" src="/lab.js"></script>
+</body></html>
