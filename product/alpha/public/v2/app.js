@@ -3,7 +3,7 @@
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const ICON = {
-    meal: '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 37h46l-5 21H22zM12 64h56M26 29c-7-7 7-8 0-15M40 29c-7-7 7-8 0-15M54 29c-7-7 7-8 0-15M63 41h5v12h-8"/></svg>',
+    meal: '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 29h40v15a8 8 0 0 1-8 8H28a8 8 0 0 1-8-8V29zM17 29h46M20 35h-7a4 4 0 0 0 0 8h7M60 35h7a4 4 0 0 1 0 8h-7M28 21c-7-5 7-7 0-13M40 21c-7-5 7-7 0-13M52 21c-7-5 7-7 0-13M25 56h30M29 52v4M51 52v4M12 61a3 3 0 0 1 3-3h50a3 3 0 0 1 3 3v8H12zM18 69v3M62 69v3M52 58v11M20 63h22M61 64a2 2 0 1 1-4 0 2 2 0 0 1 4 0"/></svg>',
     silent: '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 30h20v16H15zM45 30h20v16H45zM35 35h10M9 28l6 7M71 28l-6 7M32 59h16M20 36h8M50 36h8"/></svg>',
     coffee: '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 30h34v24a8 8 0 0 1-8 8H28a8 8 0 0 1-8-8zM54 35h7a9 9 0 0 1 0 18h-7M14 68h47M29 22c-6-6 6-7 0-13M43 22c-6-6 6-7 0-13"/></svg>'
   };

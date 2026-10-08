@@ -39,6 +39,11 @@ async function readJson(request) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // 기본 주소에서도 신청 페이지를 열고 추천인 등 쿼리 값을 유지한다.
+    if (url.pathname === "/") {
+      url.pathname = "/v2/";
+      return Response.redirect(url.toString(), 302);
+    }
     if (url.pathname === "/api/apply") {
       if (request.method !== "POST") return json({ error: "method not allowed" }, 405);
       if (request.headers.get("Origin") !== url.origin) return json({ error: "같은 페이지에서 보낸 신청만 받습니다." }, 403);

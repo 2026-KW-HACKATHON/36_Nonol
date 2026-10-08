@@ -24,7 +24,7 @@ npm run check
 npm run dev
 ```
 
-http://localhost:8789/v2/ 에서 확인한다. 로컬 DB 스키마는 실행 전에 자동으로 적용된다. 이미 8789 포트를 사용하고 있으면 다음 명령으로 다른 포트에서 실행한다.
+http://localhost:8789/ 에서 확인한다. 기본 주소는 신청 페이지인 /v2/로 자동 이동하며 추천인 등의 쿼리 값을 유지한다. 로컬 DB 스키마는 실행 전에 자동으로 적용된다. 이미 8789 포트를 사용하고 있으면 다음 명령으로 다른 포트에서 실행한다.
 
 ```sh
 npm run db:migrate
@@ -50,7 +50,7 @@ Worker 이름은 nonol-alpha-hackathon이다. 공개된 체험 페이지와 별�
 | --- | --- |
 | public/v2/index.html, style.css, app.js | 반응형 신청 페이지 |
 | public/v2/track.json | 공개 트랙 소개와 장소 표시 |
-| public/v2/assets/silent-hero.webp | 4명 단체 사진 |
+| public/v2/assets/silent-hero-shh.png | 4명 단체 사진 |
 | public/assets/logo.png, public/favicon.svg | 로고와 파비콘 |
 | src/worker.js | POST /api/apply의 검증과 신청 저장 |
 | migrations/0001_applications.sql | 신청 테이블과 제약 조건 |
